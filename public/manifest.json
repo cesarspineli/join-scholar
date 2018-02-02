@@ -1,0 +1,38 @@
+{
+    "short_name": "Join App",
+    "name": "Join - Scholar",    
+    "icons": [
+        {
+            "src": "/img/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/icon-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/icon-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/icon-44x44.png",
+            "sizes": "44x44",
+            "type": "image/png"
+        }        
+    ],
+    
+    "start_url": "/index.html",
+    "scope": "/join-scholar.firebaseapp.com/",
+    
+    "background_color": "#303f9f",
+    "theme_color": "#001970",
+    "display": "standalone"
+}

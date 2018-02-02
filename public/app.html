@@ -1,0 +1,296 @@
+<doctype html>
+    <html>
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="theme-color" content="#001970" />
+        <link rel="icon" sizes="144x144" href="img/icon-144x144.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Join - App</title>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.4.9/dialog-polyfill.css">
+        <link rel="stylesheet" href="mdl/material.min.css">
+        <script src="mdl/material.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        
+
+        <!-- FIREBASE -->
+        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+        <!-- <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-firestore.js"></script> -->
+        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-messaging.js"></script>
+
+        <!-- Leave out Storage -->
+        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-storage.js"></script>
+
+
+
+
+        <link rel="stylesheet" href="css/styles.css">
+
+    </head>
+
+    <body>
+
+
+
+
+
+        <!-- HEADER TABS -->
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
+            <header class="mdl-layout__header">
+                <div class="mdl-layout__header-row">
+                    <!-- Title -->
+                    <span class="mdl-layout-title">Join</span>
+                    <div class="mdl-layout-spacer"></div>
+                    <!-- SEARCH BUTTON -->
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+mdl-textfield--floating-label mdl-textfield--align-right">
+                        <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
+                            <i class="material-icons">search</i>
+                        </label>
+                        <div class="mdl-textfield__expandable-holder">
+                            <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
+                        </div>
+                    </div>
+                    <!-- MENU BUTTON -->
+                    <div>
+                        <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+                            <i class="material-icons">more_vert</i>
+                        </button>
+                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
+                            <!-- <li class="mdl-menu__item">Enviar projeto</li> -->
+                            <li id="showDialogUpdatePhoto" class="mdl-menu__item">Atualizar foto</li>
+                            <li id="showDialogUserInfo" class="mdl-menu__item">Editar perfil</li>
+                            <li id="btnLogout" class="mdl-menu__item">Sair</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- TABS -->
+                <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+                    <a href="#tabProfile" class="mdl-layout__tab">
+                        <i class="material-icons">account_box</i>
+                    </a>
+                    <a href="#tabFeed" class="mdl-layout__tab is-active">
+                        <i class="material-icons">receipt</i>
+                    </a>
+                    <a href="#tabContact" class="mdl-layout__tab">
+                        <i class="material-icons">contacts</i>
+                    </a>
+                </div>
+
+<!-- DIALOG PEGAR E ATUALIZAR INFORMAÇÕES DO USUARIO -->
+<dialog id="dialogUserInfo" class="mdl-dialog">
+        <div class="mdl-dialog__content">
+            <p>Complete seu perfil!</p>
+            <form>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="nome">
+                    <label class="mdl-textfield__label" for="nome">Nome + Sobrenome</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="universidade">
+                    <label class="mdl-textfield__label" for="sample11">Faculdade/Universidade</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="curso">
+                    <label class="mdl-textfield__label" for="curso">Nome do seu curso</label>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="website">
+                        <label class="mdl-textfield__label" for="website">Seu web site</label>
+                    </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <textarea class="mdl-textfield__input" type="text" rows="3" i onfocus="this.value='';" id="bio"></textarea>
+                    <label class="mdl-textfield__label" for="textFeed">Conte-nos um pouco sobre você!</label>
+                </div>
+            </form>
+            <div class="mdl-dialog__actions">
+                <button type="button" class="mdl-button" id="btnSaveUserInfo">
+                    Salvar
+                </button>
+                <button type="button" class="mdl-button close">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </dialog>
+<!-- DIALOG UPLOAD FILE -->
+    <dialog id="dialogUpload" class="mdl-dialog">
+            <div class="mdl-dialog__content">
+                <p>Enviar arquivo para portfólio.
+                </p>
+                <form>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="txtFileName">
+                        <label class="mdl-textfield__label" for="txtFileName">Nome do Projeto</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <textarea class="mdl-textfield__input" type="text" rows="3" id="fileDescrip"></textarea>
+                        <label class="mdl-textfield__label" for="txtFileDescri">Descrição do Projeto</label>
+                    </div>
+                </form>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="file" id="fileInput"   accept=".pdf">
+                </div>
+            </div>
+            <!-- TODO: PROGRESS BAR-->
+            <div class="mdl-dialog__actions">
+                <button id="btnFileUpload" type="button" class="mdl-button enviar">
+                    <!-- <i class="material-icons">file_upload</i> -->Enviar
+                </button>
+                <button type="button" class="mdl-button close">
+                    <!-- <i class="material-icons">cancel</i> -->Cancelar
+                </button>
+            </div>
+            
+        </dialog>
+<!-- DIALOG UPDATE IMAGE -->
+        <dialog id="dialogUpdatePhoto" class="mdl-dialog">
+            <div class="mdl-dialog__content">
+                <p>Atualizar foto de Perfil</p>                               
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="file" id="fileInputImage"  accept=".jpg, .png">
+                </div>
+            </div>
+            <!-- TODO: PROGRESS BAR-->
+            <div class="mdl-dialog__actions">
+                <button id="btnUpdatePhoto" type="button" class="mdl-button enviar">
+                    Enviar
+                </button>
+                <button type="button" class="mdl-button close">
+                    Cancelar
+                </button>
+            </div>
+        </dialog>
+
+<!--  MODAL FEED FEED -->
+<dialog id="dialogFeed" class="mdl-dialog">
+        <div class="mdl-dialog__content">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <textarea class="mdl-textfield__input" type="text" rows="3" id="textFeed" onfocus="this.value='';"></textarea>
+                <label class="mdl-textfield__label" for="textFeed">Compartilhe suas ideias!</label>
+            </div>
+            <div class="mdl-dialog__actions">
+                <button id="postButton" type="button" class="mdl-button enviar">
+                    Postar
+                </button>
+                <button type="button" class="mdl-button close">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </dialog>
+            </header>
+
+            <!-- PROFILE TAB -->
+            <main class="mdl-layout__content">
+                <section class="mdl-layout__tab-panel" id="tabProfile">
+                   
+                        <!-- PROFILE TAB CONTENT -->
+            
+                        <!-- FLOAT BUTTON EDIT PROFILE -->
+                        <button id="showDialogUpload" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                            <i class="material-icons">add</i>
+                        </button>
+            
+            
+            
+                        <!-- USER INFO -->
+            
+            
+                        <div class="content-user-info">
+                            <ul id="imgProfile"></ul>
+                            <!-- <img id="imgProfile"> -->
+            
+                            <ul id="userInfoList"></ul>
+            
+                        </div>
+            
+                        <!-- PORTFOLIO -->
+                        <h5>Portfólio
+                            <h5>            
+                                <hr>            
+                                <div id="cardsFile" class="mdl-grid portfolio-max-width " >
+                                    <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
+                                        <!-- <div class="mdl-card__media">
+                                            <img class="article-image" src="" border="0" alt="">
+                                        </div> -->
+                                        <div class="mdl-card__title">
+                                            <ul id="projTitle">
+                                                <h4 class="mdl-card__title-text"></h4>
+                                            </ul>                                            
+                                        </div>
+                                        <div class="mdl-card__supporting-text">
+                                            <ul id="projDescrip"><p></p></ul>
+                                            
+                                        </div>
+                                        <div class="mdl-card__actions mdl-card--border">
+                                            <a id="btnViewProj" target="blank"></a>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                   
+                </section>
+            
+
+
+                <!-- FEED TAB -->
+                <section class="mdl-layout__tab-panel  is-active" id="tabFeed">             
+                                     
+                        <!-- FLOAT BUTTON ADD TEXT FEED -->
+                        <button id="show-dialog-text" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                            <i class="material-icons">create</i>
+                        </button>
+                        
+
+                        
+                        <!-- COMENTARIOS DO FEED -->
+
+                        <div class="content-feed">
+
+                            <ul id="feedList"></ul>
+
+                        </div>
+                </section>
+
+
+
+
+
+
+
+                <!-- TAB CONTACTS -->
+                <section class="mdl-layout__tab-panel" id="tabContact">
+                    <div class="content-contacts">
+                        <!-- Your content goes here -->
+                        <ul id="contactList"></ul>
+                    </div>
+                </section>
+           
+
+            </div>
+
+        </main>
+
+
+
+            <!-- SCRIPTS -->
+            <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+            <script src="js/app.js"></script>
+            <script src="js/auth.js"></script>
+            <script src="js/js.js"></script>
+            <script src="js/realtime.js"></script>
+            <script src="js/storage.js"></script>
+            <!-- <script src="sw.js"></script> -->
+        
+    </body>
+
+    </html>

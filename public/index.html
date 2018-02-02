@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="theme-color" content="#001970" />
+    <link rel="icon" sizes="144x144" href="img/icon-192x192.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Join - Login</title>
+
+    <link rel="stylesheet" href="mdl/material.min.css">
+    <script src="mdl/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-indigo.min.css" />
+    
+
+
+
+    <!--Firebase-->
+
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-auth.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-messaging.js"></script>
+
+    <!-- Leave out Storage -->
+    <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase-storage.js"></script>
+    
+       
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="manifest" href="manifest.json" />
+
+
+</head>
+
+<body>
+
+    <div class="page">
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--6-col">
+            <h1 class="title">Join - Scholar</h1>
+            <img class="img-logo" src="img/icon-144x144.png" alt="icon-join-scholar" />
+            <form id="emailSenha">
+                <div class="form-group">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" id="txtEmail" type="email">
+                    <label class="mdl-textfield__label" for="sample3">Email</label>
+                </div>
+
+                  
+
+            </div>
+            <div class="form-group">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" id="txtPassword" type="password">
+                    <label class="mdl-textfield__label" for="sample3">Senha</label>
+                </div>
+            </div>
+            </form>
+            <!-- MDL Spinner Component with Single Color -->
+ <div id="spinner" class="mdl-spinner mdl-spinner--single-color mdl-js-spinner" ></div>
+            <!-- Flat button with ripple -->
+            <button id="btnLogin" class="loginBtn loginBtn--enter">
+                      Já Tenho Conta
+            </button>
+           
+
+            <button id="btnSignUp" class="loginBtn loginBtn--newAcc">
+                Criar Nova Conta
+            </button>
+
+      
+
+          
+
+            <span>-- ou --</span>
+       
+            <button id="btnFbLogin" class="loginBtn loginBtn--facebook">
+                    Login com Facebook
+                  </button>
+                  
+                  <button id="btnGoogleLogin" class="loginBtn loginBtn--google">
+                    Login com Google
+                  </button>
+            <div class="fb-like" data-share="true" data-width="450" data-show-faces="true">
+            </div>
+                     
+        </div>
+    </div>
+</div>
+
+ 
+
+ <!-- is-active -->
+
+<script src="https://www.gstatic.com/firebasejs/4.1.5/firebase.js"></script>
+<!-- <script src="app.js"></script> -->
+<script src="js/auth.js"></script>
+<!-- <script src="realtime.js"></script> -->
+<!-- <script src="js/sw.js"></script> -->
+<script src="sw.js"></script>
+
+</body>
+
+</html>
